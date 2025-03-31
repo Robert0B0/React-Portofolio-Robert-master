@@ -9,7 +9,7 @@ const Footer = () => {
 				<h4>
 					copyright&copy;{new Date().getFullYear()}{" "}
 					<span>
-						<SiReact /> WEBDev
+						<SiReact /> Software Developer
 					</span>{" "}
 					all rights reserved
 				</h4>

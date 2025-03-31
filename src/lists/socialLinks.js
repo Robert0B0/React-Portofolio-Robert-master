@@ -3,20 +3,20 @@ import { FaFacebookSquare, FaLinkedin, FaGithubSquare } from "react-icons/fa";
 
 const data = [
 	{
-		id: 1,
-		icon: <FaGithubSquare className="social-icon"></FaGithubSquare>,
-		url: "https://github.com/Robert0B0",
-	},
-	{
 		id: 2,
 		icon: <FaLinkedin className="social-icon"></FaLinkedin>,
 		url: "https://www.linkedin.com/in/robert-balogh-0b39a31b4/",
 	},
-	{
+	/* {
 		id: 3,
 		icon: <FaFacebookSquare className="social-icon"></FaFacebookSquare>,
 		url: "https://www.facebook.com/robgreenvirus/",
 	},
+	{
+		id: 1,
+		icon: <FaGithubSquare className="social-icon"></FaGithubSquare>,
+		url: "https://github.com/Robert0B0",
+	}, */
 ];
 const links = data.map((link) => {
 	return (

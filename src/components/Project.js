@@ -1,91 +1,93 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { FaGithubSquare, FaShareSquare } from "react-icons/fa";
 import { BsGearFill } from "react-icons/bs";
+import { LuBadgeCheck } from "react-icons/lu";
+import { FaMedal } from "react-icons/fa";
 import ReactTooltip from "react-tooltip";
 import TechModal from "./TechModal";
 
 function Project({
-	description,
-	index,
-	name,
-	url,
-	image,
-	github,
-	github2,
-	stack,
-	technical,
+  description,
+  index,
+  name,
+  url,
+  images,
+  github,
+  github2,
+  stack,
+  technical,
 }) {
-	const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [hideInfo, setHideInfo] = useState(false);
 
-	function openModal() {
-		setIsOpen(true);
-	}
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [fade, setFade] = useState(true);
 
-	function closeModal() {
-		setIsOpen(false);
-	}
+  useEffect(() => {
+    if (!images || images.length === 0 || hideInfo) return;
 
-	return (
-		<article className="project">
-			{image && <img src={image} className="project-img" />}
-			<div className="project-info">
-				<span className="project-number">0{index + 1}.</span>
-				<h3>{name || "default title"}</h3>
-				<p className="project-desc">{description || "description"}</p>
-				<div className="project-stack">
-					{stack.map((item) => {
-						return <span key={item.id}>{item.title || " "}</span>;
-					})}
-				</div>
-				<div className="project-links">
-					<a href={url || " "}>
-						<FaShareSquare
-							className="project-icon"
-							data-tip="Go to live demo"
-						/>
-					</a>
-					<a href={github || " "}>
-						<FaGithubSquare
-							className="project-icon"
-							data-tip={
-								github2
-									? "Github link for front-end"
-									: "Github link for source code"
-							}
-						/>
-					</a>
-					{github2 && (
-						<a href={github2 || " "}>
-							<FaGithubSquare
-								className="project-icon"
-								data-tip="Github link for back-end"
-							/>
-						</a>
-					)}
+    const interval = setInterval(() => {
+      setFade(false); // Start fading out
 
-					<a onClick={openModal}>
-						<BsGearFill
-							className="project-icon"
-							data-tip="Read technical summary"
-						/>
-					</a>
-				</div>
-			</div>
-			<ReactTooltip
-				effect="solid"
-				type="success"
-				textColor="white"
-				data-delay-hide={2000}
-			/>
-			<TechModal
-				closeModal={closeModal}
-				isOpen={isOpen}
-				technical={technical}
-				name={name}
-			/>
-		</article>
-	);
+      setTimeout(() => {
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+        setFade(true); // Fade in the new image
+      }, 300); // Ensure a smooth transition
+    }, 6000);
+
+    return () => clearInterval(interval);
+  }, [images, hideInfo]);
+
+  return (
+    <div className="project">
+      {images.length !== 0 && (
+        <img
+          key={currentIndex}
+          src={images[currentIndex]}
+          className={`project-img ${fade ? "visible" : "invisible"} ${
+            hideInfo ? "project-img-expanded" : ""
+          }`}
+          alt={`Slide ${currentIndex}`}
+          onMouseEnter={() => setHideInfo(true)}
+          onMouseLeave={() => setHideInfo(false)}
+          onClick={() =>
+            setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length)
+          }
+        />
+      )}
+
+      <div className={`project-info ${hideInfo ? "hide-info" : "show-info"}`}>
+        <h3>{name || "default title"}</h3>
+        <p className="project-desc">{description || "description"}</p>
+        <div className="project-stack">
+          {stack.map((item) => (
+            <span className="stack-item" key={item.id}>
+              {item.title || " "}
+            </span>
+          ))}
+        </div>
+        <div className="project-links">
+          <a onClick={() => setIsOpen(true)}>
+            <FaMedal className="project-icon" data-tip="Read achievements" />
+          </a>
+        </div>
+      </div>
+      <ReactTooltip
+        backgroundColor="#2CBA78"
+        effect="solid"
+        textColor="black"
+        data-delay-hide={1000}
+      />
+
+      <TechModal
+        closeModal={() => setIsOpen(false)}
+        isOpen={isOpen}
+        technical={technical}
+        name={name}
+      />
+    </div>
+  );
 }
 
 export default Project;

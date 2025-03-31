@@ -10,7 +10,7 @@ const Navbar = ({ toggleSidebar }) => {
 				<div className="nav-header">
 					{/* <img src={logo} alt="logo" /> */}
 					<span>
-						<SiReact /> WEBDev
+						<SiReact /> Software Developer
 					</span>
 					<button type="button" className="toggle-btn" onClick={toggleSidebar}>
 						{toggleSidebar}
