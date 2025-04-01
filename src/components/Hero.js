@@ -23,13 +23,13 @@ function Hero() {
               I specialize in creating mobile apps & modern web interfaces
             </h4>
             <BrowserRouter>
-              <Link
+              {/* <Link
                 to="/contact/"
                 className="btn"
                 onClick={() => refreshPage()}
               >
                 contact me
-              </Link>
+              </Link> */}
             </BrowserRouter>
             <SocialLinks />
           </div>
