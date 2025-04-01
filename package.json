@@ -16,6 +16,7 @@
     "web-vitals": "^1.1.1"
   },
   "scripts": {
+    "preinstall": "npx npm-force-resolutions",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -44,7 +45,13 @@
       "postcss": "8.4.21"
     }
   },
+  "resolutions": {
+    "postcss": "8.4.21"
+  },
   "engines": {
     "node": "18"
+  },
+  "devDependencies": {
+    "npm-force-resolutions": "^0.0.10"
   }
 }
