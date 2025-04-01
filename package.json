@@ -39,6 +39,11 @@
       "last 1 safari version"
     ]
   },
+  "overrides": {
+    "postcss-safe-parser": {
+      "postcss": "8.4.21"
+    }
+  },
   "engines": {
     "node": "18"
   }
