@@ -3,7 +3,7 @@ export const jobs = [
     id: 1,
     company: "Serstech",
     position: "Mobile App Developer",
-    date: "March 2022 - March 2025",
+    date: "March 2022 - Present",
     desc: [
       {
         id: 1,
